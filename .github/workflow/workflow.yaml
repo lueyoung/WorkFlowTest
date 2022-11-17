@@ -1,0 +1,25 @@
+name: 'GitHub Actions Bot'
+
+on:
+  push:
+    branches:
+      - master
+    schedule:
+      - cron: '7 3 * * *'
+
+jobs:
+  test1:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+      - name: 'Setup up Python'
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: 'Install requirements' 
+        run: pip install -r ./requirements.txt
+      - name: 'Working'
+        env: 
+          XXX: ${{secrets.XXX}}
+        run: python ./main.py
